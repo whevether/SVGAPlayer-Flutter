@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:svgaplayer_flutter/svgaplayer_flutter.dart';
+import 'package:svgaplayer_plus/svgaplayer_flutter.dart';
 
 void main() => runApp(ExampleApp());
 
@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
   final samples = const <String>[
     "assets/angel.svga",
     "assets/pin_jump.svga",
+    "assets/audio_biling.svga",
     "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/EmptyState.svga",
     "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/HamburgerArrow.svga",
     "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/PinJump.svga",

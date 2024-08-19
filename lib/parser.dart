@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:ui' as ui;
-import 'dart:typed_data' show Uint8List;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart' show decodeImageFromList;
 import 'package:flutter/services.dart' show rootBundle;
@@ -34,7 +33,7 @@ class SVGAParser {
       timeline = TimelineTask(filterKey: _filterKey)
         ..start('DecodeFromBuffer', arguments: {'length': bytes.length});
     }
-    final inflatedBytes = archive.ZLibDecoder().decodeBytes(bytes);
+    final inflatedBytes = const archive.ZLibDecoder().decodeBytes(bytes);
     if (timeline != null) {
       timeline.instant('MovieEntity.fromBuffer()',
           arguments: {'inflatedLength': inflatedBytes.length});
@@ -53,10 +52,10 @@ class SVGAParser {
   }
 
   MovieEntity _processShapeItems(MovieEntity movieItem) {
-    movieItem.sprites.forEach((sprite) {
+    for (var sprite in movieItem.sprites) {
       List<ShapeEntity>? lastShape;
-      sprite.frames.forEach((frame) {
-        if (frame.shapes.isNotEmpty && frame.shapes.length > 0) {
+      for (var frame in sprite.frames) {
+        if (frame.shapes.isNotEmpty && frame.shapes.isNotEmpty) {
           if (frame.shapes[0].type == ShapeEntity_ShapeType.KEEP &&
               lastShape != null) {
             frame.shapes = lastShape;
@@ -64,8 +63,8 @@ class SVGAParser {
             lastShape = frame.shapes;
           }
         }
-      });
-    });
+      }
+    }
     return movieItem;
   }
 
@@ -75,11 +74,15 @@ class SVGAParser {
     if (images.isEmpty) return Future.value(movieItem);
     return Future.wait(images.entries.map((item) async {
       // result null means a decoding error occurred
-      final decodeImage = await _decodeImageItem(
-          item.key, Uint8List.fromList(item.value),
-          timeline: timeline);
-      if (decodeImage != null) {
-        movieItem.bitmapCache[item.key] = decodeImage;
+      Uint8List data = Uint8List.fromList(item.value);
+      if (isMP3Data(data)) {
+        movieItem.audiosData[item.key] = data;
+      } else {
+        final decodeImage = await _decodeImageItem(item.key, data,
+            timeline: timeline);
+        if (decodeImage != null) {
+          movieItem.bitmapCache[item.key] = decodeImage;
+        }
       }
     })).then((_) => movieItem);
   }
@@ -117,5 +120,14 @@ class SVGAParser {
       }());
       return null;
     }
+  }
+
+  bool isMP3Data(Uint8List data) {
+    const mp3MagicNumber = 'ID3';
+    bool result = false;
+    if (String.fromCharCodes(data.take(mp3MagicNumber.length)) == mp3MagicNumber) {
+      result = true;
+    }
+    return result;
   }
 }
