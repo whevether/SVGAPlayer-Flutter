@@ -1,3 +1,7 @@
+#### 2.3.0 (2024-08-20)
+
+* Support for audio playback
+
 #### 2.2.0 (2022-11-24)
 
 * Update path-drawing version.
