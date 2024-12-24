@@ -37,13 +37,13 @@ class SVGAImage extends StatefulWidget {
   final Size? preferredSize;
   const SVGAImage(
     this._controller, {
-    Key? key,
+    super.key,
     this.fit = BoxFit.contain,
     this.filterQuality = FilterQuality.low,
     this.allowDrawingOverflow,
     this.clearsAfterStop = true,
     this.preferredSize,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() => _SVGAImageState();

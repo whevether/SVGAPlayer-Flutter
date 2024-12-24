@@ -4,8 +4,7 @@ class SVGASimpleImage extends StatefulWidget {
   final String? resUrl;
   final String? assetsName;
 
-  const SVGASimpleImage({Key? key, this.resUrl, this.assetsName})
-      : super(key: key);
+  const SVGASimpleImage({super.key, this.resUrl, this.assetsName});
 
   @override
   State<StatefulWidget> createState() {

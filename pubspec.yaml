@@ -11,10 +11,13 @@ dependencies:
     sdk: flutter
   protobuf: ^3.1.0
   http: ^1.2.2
-  path_drawing: ^1.0.0
-  archive: ^3.6.1
+  path_drawing:
+    git:
+      url: https://github.com/wanwenfeng4798/flutter_path_drawing/
+      ref: master
+  archive: ^4.0.2
   audioplayers: ^6.1.0
-  path_provider: ^2.1.4
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
