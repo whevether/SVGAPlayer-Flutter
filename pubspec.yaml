@@ -1,7 +1,7 @@
 name: svgaplayer_plus
 description: The SVGAPlayer implementation of Flutter using CustomPainter, with support for audio playback.
 version: 2.3.1
-homepage: https://github.com/InjoyDeng/SVGAPlayer-Flutter
+homepage: https://github.com/whevether/SVGAPlayer-Flutter
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
