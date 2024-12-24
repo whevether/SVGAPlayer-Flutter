@@ -251,11 +251,10 @@ packages:
   path_drawing:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: a7bcbc789f0fed712c76f0ca2af88f23ede5a1f5
-      url: "https://github.com/wanwenfeng4798/flutter_path_drawing/"
-    source: git
+      name: path_drawing
+      sha256: bbb1934c0cbb03091af082a6389ca2080345291ef07a5fa6d6e078ba8682f977
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.1"
   path_parsing:
     dependency: transitive
